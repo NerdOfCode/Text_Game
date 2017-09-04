@@ -2,23 +2,29 @@ import os, sys, random
 
 money=0
 items=[]
-currentLoc=[5,8]
+currentLoc=["5","8"]
 availableItems=["flashlight", "crowbar"]
 file="user.txt"
-if not os.path.isfile(file):
-  file=open("user.txt", "a")
+
 
 #Function for saving inventory and money
 def save(inventory, money):
+  	#If file does not exist create one
+  	if not os.path.isfile(file):
+      file_open=open("user.txt", "a")
+    file_open=open(file, "a")
 	#Write inventory to file
-	file.write(inventory + "\n")
+	file_open.write("Inventory: " + ",".join(inventory) + "\n")
     #Write money to file
-    file.write(money + "\n")
-    file.close()
-def open_file():
-	file_open = open(file, "r") 
-   
+    file_open.write("money: " + str(money) + "\n")
+    file_open.close()
     
+def open_file():
+  file_open = open(file, "r") 
+  read_file = file_open.read()
+  
+  
+  
 def shop(money):
   print("You have %i money(s)" % money + "\n")
   print("There are 5 available items you can purchase, \n Item #(1) Flashlight \n #(2) Crowbar \n #(3)")
@@ -64,4 +70,4 @@ while True:
   elif user_input.lower() == "open":
     open_file()
   else:
-    print("You made a typo, please try again")
+    print("You appear to have made a typo, please try again")

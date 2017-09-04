@@ -1,1 +1,1 @@
-This is a text based game that is currently in #alpha stages (V. 001)
+This is a text based game that is currently in <strong> alpha </strong>stages (V. 001)

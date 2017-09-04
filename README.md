@@ -1,2 +1,2 @@
-#Game not working
+#Game not currently working
 This is a text base game that is currently in alpha stages

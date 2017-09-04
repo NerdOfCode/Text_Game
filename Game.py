@@ -20,24 +20,30 @@ def save(inventory, money):
     file_open.close()
     
 def open_file():
-  file_open = open(file, "r") 
-  read_file = file_open.read()
-  
-  
-  
+  global money
+  if not os.path.isfile(file):
+    file_open("user.txt", "a")
+
+  with open('user.txt', 'r') as f:
+  	for line in f:
+    	if "money: " in line:
+          money=line.split("money: ", 1)
+          money=int(money[1])
+          print("money: ", money)
 def shop(money):
   print("You have %i money(s)" % money + "\n")
   print("There are 5 available items you can purchase, \n Item #(1) Flashlight \n #(2) Crowbar \n #(3)")
   newItem = input("Which one would you like to purchase?: ")
   #If item is already in inventory
-  if newItem in items:
-    print("You already have that.")
-    return None
   x=0
   #While length is less than the array
   while x <= len(availableItems):
     #If x is equal to the item the user entered
     if x == int(newItem):
+        if availableItems[x-1] in items:
+    		print("You already have that.")
+    		return None
+            break
       items.append(availableItems[x-1])
       #Exit loop
       break

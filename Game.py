@@ -26,10 +26,10 @@ def open_file():
 
   with open(file, 'r') as f:
   	for line in f:
-    	if "money: " in line:
-          money=line.split("money: ", 1)
-          money=int(money[1])
-          print("money: ", money)
+    	  if "money: " in line:
+            money=line.split("money: ", 1)
+            money=int(money[1])
+            print("money: ", money)
 def shop(money):
   print("You have %i money(s)" % money + "\n")
   print("There are 5 available items you can purchase, \n Item #(1) Flashlight \n #(2) Crowbar \n #(3)")
@@ -43,10 +43,10 @@ def shop(money):
         if availableItems[x-1] in items:
     		print("You already have that.")
     		return None
-            break
-      items.append(availableItems[x-1])
-      #Exit loop
-      break
+                break
+        items.append(availableItems[x-1])
+        #Exit loop
+        break
     else:
       x=x+1
 #For user inventory

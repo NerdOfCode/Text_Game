@@ -11,20 +11,20 @@ file="user.txt"
 def save(inventory, money):
   	#If file does not exist create one
   	if not os.path.isfile(file):
-      file_open=open("user.txt", "a")
-    file_open=open(file, "a")
+    		file_open=open(file, "a")
 	#Write inventory to file
 	file_open.write("Inventory: " + ",".join(inventory) + "\n")
-    #Write money to file
-    file_open.write("money: " + str(money) + "\n")
-    file_open.close()
+    	#Write money to file
+    	file_open.write("money: " + str(money) + "\n")
+    	file_open.close()
     
 def open_file():
+  #Make money available everywhere
   global money
   if not os.path.isfile(file):
-    file_open("user.txt", "a")
+    file_open(file, "a")
 
-  with open('user.txt', 'r') as f:
+  with open(file, 'r') as f:
   	for line in f:
     	if "money: " in line:
           money=line.split("money: ", 1)

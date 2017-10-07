@@ -9,14 +9,14 @@ file="user.txt"
 
 #Function for saving inventory and money
 def save(inventory, money):
-  	#If file does not exist create one
-  	if not os.path.isfile(file):
-    		file_open=open(file, "a")
-	#Write inventory to file
-	file_open.write("Inventory: " + ",".join(inventory) + "\n")
-    	#Write money to file
-    	file_open.write("money: " + str(money) + "\n")
-    	file_open.close()
+        #If file does not exist create one
+        if not os.path.isfile(file):
+                file_open=open(file, "a")
+        #Write inventory to file
+        file_open.write("Inventory: " + ",".join(inventory) + "\n")
+        #Write money to file
+        file_open.write("money: " + str(money) + "\n")
+        file_open.close()
     
 def open_file():
   #Make money available everywhere
@@ -25,8 +25,8 @@ def open_file():
     file_open(file, "a")
 
   with open(file, 'r') as f:
-  	for line in f:
-    	  if "money: " in line:
+        for line in f:
+          if "money: " in line:
             money=line.split("money: ", 1)
             money=int(money[1])
             print("money: ", money)
@@ -41,8 +41,8 @@ def shop(money):
     #If x is equal to the item the user entered
     if x == int(newItem):
         if availableItems[x-1] in items:
-    		print("You already have that.")
-    		return None
+                print("You already have that.")
+                return None
                 break
         items.append(availableItems[x-1])
         #Exit loop
@@ -61,7 +61,7 @@ def move(newMove):
 
 while True:
   print("To visit the shop type \"shop\",\n for your inventory type \"inventory\",\n to make a move type \"move\", to save type \"save\"\n")
-  user_input = input("\n Action: ")
+  user_input = raw_input("\n Action: ")
   if user_input.lower() == "shop":
     shop(money)
   elif user_input.lower() == "inventory":

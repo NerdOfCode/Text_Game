@@ -2,8 +2,8 @@ import os, sys, random
 
 money=0
 items=[]
-currentLoc=["5","8"]
-availableItems=["flashlight", "crowbar"]
+currentLoc=["0","0"]
+availableItems=["flashlight", "crowbar", "sword"]
 file="user.txt"
 
 
@@ -32,7 +32,11 @@ def open_file():
             print("money: ", money)
 def shop(money):
   print("You have %i money(s)" % money + "\n")
-  print("There are 5 available items you can purchase, \n Item #(1) Flashlight \n #(2) Crowbar \n #(3)")
+  #Split array into readable text
+  splitAvailableItems=""
+  for numVar in range(0, len(availableItems)):
+        splitAvailableItems+="#%i) "%(numVar+1)+availableItems[numVar] + "\n"
+  print("There are %i available items you can purchase, Item \n%s"%(len(availableItems), splitAvailableItems))
   newItem = input("Which one would you like to purchase?: ")
   #If item is already in inventory
   x=0
@@ -56,9 +60,13 @@ def inventory(items):
   
 #For moves
 def move(newMove):
-  currentLocString=",".join(currentLoc)
-  print("You are currently %s"% currentLocString)
-
+        currentLocString=",".join(currentLoc)
+        print("You are currently %s"% currentLocString)
+        newmove=raw_input("Enter ")
+  
+  
+  
+  
 while True:
   print("To visit the shop type \"shop\",\n for your inventory type \"inventory\",\n to make a move type \"move\", to save type \"save\"\n")
   user_input = raw_input("\n Action: ")

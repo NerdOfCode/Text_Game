@@ -43,8 +43,9 @@ def open_file():
 def shop(money):
   print("You have %i money(s)" % money + "\n")
   #Split array into readable text
-  for numVar in range(1, len(availableItems)):
-  	splitAvailableItems+="#%i) "%numVar+availableItems[numVar-1] + "\n"
+  splitAvailableItems=""
+  for numVar in range(0, len(availableItems)):
+        splitAvailableItems+="#%i) "%(numVar+1)+availableItems[numVar] + "\n"
   print("There are %i available items you can purchase, Item \n%s"%(len(availableItems), splitAvailableItems))
   newItem = input("Which one would you like to purchase?: ")
   #If item is already in inventory

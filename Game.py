@@ -2,8 +2,18 @@ import os, sys, random
 
 money=0
 items=[]
-currentLoc=["0","0"]
-availableItems=["flashlight", "crowbar", "sword"]
+#starting pos
+currentLoc=[0,0]
+
+#For moving x distance
+getLoc=0
+#set game boundaries
+min_boundaries=[0,0]
+max_boundaries=[2,2]
+
+
+
+availableItems=["flashlight", "crowbar"]
 file="user.txt"
 
 
@@ -33,9 +43,8 @@ def open_file():
 def shop(money):
   print("You have %i money(s)" % money + "\n")
   #Split array into readable text
-  splitAvailableItems=""
-  for numVar in range(0, len(availableItems)):
-        splitAvailableItems+="#%i) "%(numVar+1)+availableItems[numVar] + "\n"
+  for numVar in range(1, len(availableItems)):
+  	splitAvailableItems+="#%i) "%numVar+availableItems[numVar-1] + "\n"
   print("There are %i available items you can purchase, Item \n%s"%(len(availableItems), splitAvailableItems))
   newItem = input("Which one would you like to purchase?: ")
   #If item is already in inventory
@@ -59,13 +68,56 @@ def inventory(items):
   print("\n You have: %s" % itemsString + "\n")
   
 #For moves
-def move(newMove):
-        currentLocString=",".join(currentLoc)
-        print("You are currently %s"% currentLocString)
-        newmove=raw_input("Enter ")
-  
-  
-  
+def move():
+  #currentLocString=",".join(currentLoc)
+  print("You are currently ", currentLoc)
+  print("You can move (right),(left),(up),(down)")
+  newmove=raw_input("move: ")
+  if newmove.lower() == "right":
+    #Get last value of array
+    getLoc=currentLoc[-1]
+    getLoc=getLoc+1
+    if(getLoc>max_boundaries[-1]):
+          print("Sorry, you've hit a boundary")
+          return None
+    #Sets new x location to array
+    currentLoc[-1]=getLoc
+    #print("You are now here: %d" % int(getLoc))
+    print(currentLoc)    
+
+  elif(newmove.lower() == "down"):
+      getLoc=currentLoc[0]
+      getLoc=getLoc+1
+      if(getLoc<min_boundaries[0]) or (getLoc>max_boundaries[0]):
+          print("Sorry, you've hit a boundary")
+          return None
+      currentLoc[0]=getLoc
+      #print("You are now here: %d" % int(getLoc))
+      print(currentLoc)
+      
+  elif(newmove.lower() == "up"):
+    getLoc=currentLoc[0]
+    getLoc=getLoc-1
+    if(getLoc<max_boundaries[0]):
+        print("Sorry, you've hit a boundary")
+        return None
+    currentLoc[0]=getLoc
+    print(currentLoc)
+
+  elif(newmove.lower() == "left"):
+      getLoc=currentLoc[-1]
+      getLoc=getLoc-1
+      if(getLoc<min_boundaries[0]):
+           print("Sorry, you've hit a boundary")
+           return None
+
+      currentLoc[-1]=getLoc
+      print(currentLoc)
+
+  else:
+      print("Unknown option")
+      return None
+
   
 while True:
   print("To visit the shop type \"shop\",\n for your inventory type \"inventory\",\n to make a move type \"move\", to save type \"save\"\n")
@@ -75,8 +127,7 @@ while True:
   elif user_input.lower() == "inventory":
     inventory(items)
   elif user_input.lower() == "move":
-    newMove=input("Enter your move: ")
-    move(newMove)
+    move()
   elif user_input.lower() == "exit":
     sys.exit(0)
   elif user_input.lower() == "save":

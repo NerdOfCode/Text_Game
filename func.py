@@ -20,6 +20,14 @@ print("Hint: ",treasureLoc)
 max_earnings=150
 generate_money=randint(1,max_earnings)
 
+#For the generation of monsters
+monsterx=randint(1,2)
+monstery=randint(0,2)
+monsterLoc=[monsterx,monstery]
+flee_amount=randint(5,50)
+
+
+
 availableItems=["flashlight", "crowbar", "sword", "pistol"]
 availableItemPrices=["30", "50", "65", "250"]
 file="user.txt"
@@ -83,6 +91,9 @@ def inventory(items):
   itemsString=",".join(items)
   print("\n You have: %s" % itemsString + "\n")
 
+def fight():
+   print("Battle")     
+
 
 def prize():
     print("You have won: %i " % generate_money + "dollars")
@@ -136,6 +147,27 @@ def move():
       print(currentLoc)
       return currentLoc
 
+
+  if currentLoc==monsterLoc:
+          print("A beast has appeared out of nowhere...\n")
+          print("You can flee(type 'flee' or type 'battle') for %i" % flee_amount + " dollars\n")
+          decision=raw_input("Descision: ")
+          if decision == "flee":
+                  if money>=flee_amount:
+                          global money
+                          money-flee_amount
+                          print("You know have %i" % money + " dollars")
+                          return None
+                  else:
+                           print("Not enough. Money")
+                           fight()
+                           
+          else:
+                  fight()
+        
+
+
+  
   else:
       print("Unknown option")
       return None
